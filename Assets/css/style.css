@@ -28,7 +28,7 @@ body {
 
 .description {
   white-space: pre-wrap;
-  background: lightgray;
+  background-color: #d3d3d3;
   border-left: gray 5px solid;
 }
 
@@ -49,8 +49,8 @@ textarea {
   color: white;
 }
 
-#save-Btn:hover {
-  font-size: 30px;
+.saveBtn i:hover {
+  font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
 
