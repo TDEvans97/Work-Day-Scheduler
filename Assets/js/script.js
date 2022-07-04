@@ -27,17 +27,21 @@ let currentTime = moment();
 // Display the current day at the top of the calendar.
 $("#currentDay").text(currentTime.format("dddd, MMMM Do"));
 
-// How can I select the hour text from each time-block, give it a moment.format of an hour, and compare it to the current hour?
-let scheduledHour = $(".hour");
-let scheduledHourArr = Array.from(scheduledHour);
-console.log(scheduledHourArr.innerText);
+let scheduledHourEl = document.querySelectorAll(".hour");
+let scheduledHourElArr = Array.from(scheduledHourEl);
 
-currentHour = currentTime.format("h");
-// If the scheduled hour has past, turn gray, if the present hour, turn red, if a future hour, turn green.
-if (currentHour.isAfter(scheduledHour)) {
-    scheduledHour.siblings(".description").setAttribute("class", "past");
-} else if (currentHour.isSame(scheduledHour)) {
-    scheduledHour.siblings(".description").setAttribute("class", "present");
-} else (currentHour.isBefore(scheduledHour)); {
-    scheduledHour.siblings(".description").setAttribute("class", "future");
+for (i = 0; i < scheduledHourElArr.length; i++) {
+
+    let currentHour = currentTime.format("H");
+    let scheduledHour = scheduledHourElArr[i].getAttribute("name");
+    console.log(scheduledHour)
+    // If the scheduled hour has past, turn gray, if the present hour, turn red, if a future hour, turn green.
+    if (currentHour > scheduledHour) {
+        scheduledHourElArr[i].addClass("past").removeClass("present future");
+    } else if (currentHour === scheduledHour) {
+        scheduledHourElArr[i].addClass("present").removeClass("past future");
+    } else (currentHour < scheduledHour); {
+        scheduledHourElArr[i].addClass("future").removeClass("past present");
+    }
 }
+
