@@ -32,16 +32,25 @@ let scheduledHourElArr = Array.from(scheduledHourEl);
 
 for (i = 0; i < scheduledHourElArr.length; i++) {
 
+    let scheduledHour = "";
+    scheduledHour += scheduledHourElArr[i].getAttribute("name");
+    let scheduledHourInt = parseInt(scheduledHour);
+
     let currentHour = currentTime.format("H");
-    let scheduledHour = scheduledHourElArr[i].getAttribute("name");
-    console.log(scheduledHour)
-    // If the scheduled hour has past, turn gray, if the present hour, turn red, if a future hour, turn green.
-    if (currentHour > scheduledHour) {
-        scheduledHourElArr[i].addClass("past").removeClass("present future");
-    } else if (currentHour === scheduledHour) {
-        scheduledHourElArr[i].addClass("present").removeClass("past future");
-    } else (currentHour < scheduledHour); {
-        scheduledHourElArr[i].addClass("future").removeClass("past present");
+    let currentHourInt = parseInt(currentHour);
+
+    let textBackground = $(scheduledHourElArr[i]).siblings(".description");
+
+    // If the scheduled hour has past, turn gray. If the present hour, turn red. If a future hour, turn green.
+    if (scheduledHourInt < currentHourInt) {
+        textBackground.addClass("past");
+        textBackground.removeClass("present", "future");
+    } else if (scheduledHourInt === currentHourInt) {
+        textBackground.addClass("present");
+        textBackground.removeClass("past", "future");
+    } else (scheduledHourInt > currentHourInt); {
+        textBackground.addClass("future");
+        textBackground.removeClass("past", "present");
     }
 }
 
