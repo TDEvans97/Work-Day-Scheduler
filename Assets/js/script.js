@@ -21,7 +21,11 @@ function saveUserTasks() {
 
 // Get item from local storage
 // How can I put the data back to the place it originated from?
-// localStorage.getItem(hour, task);
+// init();
+function init() {
+    JSON.parse(localStorage.getItem(hour, task));
+    console.log(init)
+}
 
 let currentTime = moment();
 // Display the current day at the top of the calendar.
@@ -49,7 +53,7 @@ for (i = 0; i < scheduledHourElArr.length; i++) {
         textBackground.addClass("present");
         textBackground.removeClass("past", "future");
     } else (scheduledHourInt > currentHourInt); {
-        textBackground.addClass("future");
+        textBackground.addClass("future"); // Bug is causing only this line to fire regardless of conditions.
         textBackground.removeClass("past", "present");
     }
 }
